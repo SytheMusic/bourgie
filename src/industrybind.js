@@ -57,11 +57,13 @@ IndustryBind.prototype.render = function() {
     }
 
     /* Draw progress. */
+    var pi = Math.PI, sin = Math.sin, pow = Math.pow;
     p = this.thing.getProgress();
     c.fillStyle = IndustryBind.progressStyle;
     c.beginPath();
     c.moveTo(w / 2, h / 2);
-    c.arc(w / 2, h / 2, h / 4, 0, Math.PI * 2 * p);
+    var r = pow(sin(pi * p), 0.3) - sin(pi * p) * 0.45;
+    c.arc(w / 2, h / 2, r * h / 2, 0, pi * 2 * p);
     c.fill();
 
     c.fillStyle = 'black';
