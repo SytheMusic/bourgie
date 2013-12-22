@@ -56,6 +56,9 @@ body {
     display: inline-block;
     width: 120px;
     margin: 5px 0px;
+    position: relative;
+    left: -5px;
+    z-index: -1;
 }
 
 .industry canvas {
