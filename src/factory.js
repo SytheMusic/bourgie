@@ -36,7 +36,7 @@ Factory.all = {};
  * Called once every tick.
  */
 Factory.prototype.tick = function() {
-    if (this.input.count() > 0) {
+    if (this.input.count() > 0 && this.output.available() > 0) {
         this.inProgress += this.multiplier;
         this.outProgress += this.multiplier;
         if (this.inProgress >= this.inMod) {

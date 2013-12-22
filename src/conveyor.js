@@ -28,7 +28,7 @@ function Conveyor(source, dest, type, rate, time) {
  */
 Conveyor.prototype.tick = function() {
     /* Advance the pipeline first. */
-    if (this.pipeline.count() > 0) {
+    if (this.pipeline.count() > 0 && this.dest.input.available() > 0) {
         for (var i = 0; i < this.timers.length; i++) {
             this.timers[i]--;
         }
@@ -50,6 +50,7 @@ Conveyor.prototype.tick = function() {
         } else {
             this.progress -= this.mod;
             this.source.output.take(this.pipeline.give(1), this.type);
+            this.timers.push(this.time * World.TICKS_PER_SECOND);
         }
     }
 };
