@@ -40,10 +40,28 @@ Bank.prototype.withdraw = function(amount) {
 };
 
 /**
+ * @returns {string} a nicely formatted value
+ */
+Bank.prototype.format = function() {
+    if (this._cachevalue === this._value) {
+        return this._formatcache;
+    } else {
+        this._formatcache = this._value.toString()
+            .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        this._cachevalue = this._value;
+        return this._formatcache;
+    }
+};
+
+/**
  * @returns {string}
  */
 Bank.prototype.toString = function() {
-    return '[Bank $' + this.balance() + ']';
+    return '[Bank $' + this.format() + ']';
+};
+
+Bank.prototype.display = function() {
+    $('.bank .balance').text('$' + this.format());
 };
 
 Bank.NULL = new Bank();
