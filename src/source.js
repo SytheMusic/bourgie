@@ -66,5 +66,5 @@ Source.prototype.toString = function() {
 
 /* Create different kinds of sources. */
 
-Source.FOREST = Source("forest", Product.WOOD, 60);
+Source.FOREST = Source("forest", Product.WOOD, 40);
 Source.IRON_MINE = Source("iron mine", Product.IRON_ORE, 10);
