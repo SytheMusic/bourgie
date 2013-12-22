@@ -43,7 +43,7 @@ Bank.prototype.withdraw = function(amount) {
  * @returns {string}
  */
 Bank.prototype.toString = function() {
-    return '[Bank $' + this.balance() + ' ]';
+    return '[Bank $' + this.balance() + ']';
 };
 
 Bank.NULL = new Bank();
