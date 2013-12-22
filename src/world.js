@@ -27,6 +27,7 @@ World.prototype.tick = function() {
         binding.tick();
     });
     this.time++;
+    this.bank.display();
 };
 
 World.prototype.bind = function(thing) {
