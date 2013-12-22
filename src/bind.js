@@ -9,6 +9,10 @@ function Bind(thing, canvas) {
     } else {
         throw new Error('Unknown thing type.');
     }
+    var _this = this;
+    canvas.addEventListener('click', function() {
+        _this.click();
+    });
 }
 
 Bind.prototype.thingType = 'BIND';
@@ -78,6 +82,14 @@ Bind.prototype.conveyor = function() {
 
 Bind.prototype.tick = function() {
     this[this.mode]();
+};
+
+Bind.prototype.click = function() {
+    if (this.mode === 'conveyor') {
+        this.thing.pipeline.capacity++;
+    } else if (this.mode === 'industry') {
+        this.thing.multiplier++;
+    }
 };
 
 Bind.industryCanvas = function(width, height) {
