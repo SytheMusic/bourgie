@@ -3,9 +3,16 @@ var Bourgie = Bourgie || {};
 var bourgie = null;
 Bourgie.demo = function() {
     bourgie = new World($('#world'));
-    bourgie.bind(Source.FOREST);
-    bourgie.bind(Factory.LUMBER_MILL);
-    bourgie.add(Conveyor.simple(Source.FOREST, Factory.LUMBER_MILL));
+    var forest = Source.FOREST.clone();
+    var lumber = Factory.LUMBER_MILL.clone();
+    var truck = Sink.LUMBER_TRUCK.clone(bourgie.bank);
+
+    bourgie.bind(forest);
+    bourgie.bind(lumber);
+    bourgie.add(Conveyor.simple(forest, lumber));
+
+    bourgie.bind(truck);
+    bourgie.add(Conveyor.simple(lumber, truck));
 
     bourgie.start();
     bourgie.add({tick: function() {

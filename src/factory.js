@@ -85,6 +85,13 @@ Factory.prototype.toString = function() {
     return '[Factory ' + this.name + ']';
 };
 
+/**
+ * @returns {Factory}
+ */
+Factory.prototype.clone = function() {
+    return $.extend({}, this);
+};
+
 /* Create different kinds of factories. */
 
 Factory.LUMBER_MILL =

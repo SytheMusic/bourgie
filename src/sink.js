@@ -9,7 +9,7 @@ function Sink(name, type, rate, bank) {
     this.input = new Store(type);
     this.rate = rate;
     this.mod = World.TICKS_PER_MINUTE / rate;
-    this.deposit = bank != null ? bank : Bank.NULL;
+    this.bank = bank != null ? bank : Bank.NULL;
 
     this.progress = 0;
     this.multiplier = 1;
@@ -48,6 +48,15 @@ Sink.prototype.give = function(count, type) {
  */
 Sink.prototype.getProgress = function() {
     return Math.min(this.progress / this.mod, 1);
+};
+
+/**
+ * @returns {Sink}
+ */
+Sink.prototype.clone = function(bank) {
+    var clone = $.extend({}, this);
+    if (bank != null) clone.bank = bank;
+    return clone;
 };
 
 /**

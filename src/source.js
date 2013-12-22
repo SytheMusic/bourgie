@@ -57,12 +57,18 @@ Source.prototype.getProgress = function() {
 };
 
 /**
+ * @returns {Source}
+ */
+Source.prototype.clone = function() {
+    return $.extend({}, this);
+};
+
+/**
  * @returns {string}
  */
 Source.prototype.toString = function() {
     return '[Source ' + this.name + ']';
 };
-
 
 /* Create different kinds of sources. */
 
