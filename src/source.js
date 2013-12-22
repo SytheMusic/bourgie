@@ -1,4 +1,5 @@
 /**
+ * Creates products of a specific type.
  * @param {string} name
  * @param {Product} type
  * @param {number} rate number of products per minute

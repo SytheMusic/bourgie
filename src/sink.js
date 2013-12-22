@@ -1,3 +1,10 @@
+/**
+ * Converts products into cash.
+ * @param {string} name
+ * @param {Product} type
+ * @param {number} rate number of products consumed per minute
+ * @param {Bank} [bank] place to deposit earnings
+ */
 function Sink(name, type, rate, bank) {
     "use strict";
     if (this == null) {

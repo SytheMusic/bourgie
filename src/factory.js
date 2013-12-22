@@ -1,4 +1,5 @@
 /**
+ * Converts products of one type to products of another type.
  * @param {string} name
  * @param {Product} inType
  * @param {Product} outType
