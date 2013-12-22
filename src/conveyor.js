@@ -64,3 +64,10 @@ Conveyor.prototype.toString = function() {
     return '[Conveyor ' + this.pipeline.type.name + ' '
         + this.pipeline.capacity + ']';
 };
+
+Conveyor.simple = function(source, dest) {
+    if (source.output.type !== dest.input.type) {
+        throw new Error('Type mismatch!');
+    }
+    return new Conveyor(source, dest, source.output.type, 60, 3);
+};
