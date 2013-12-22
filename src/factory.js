@@ -89,7 +89,7 @@ Factory.prototype.getProgress = function() {
  * @returns {Factory} this
  */
 Factory.prototype.hire = function() {
-    this.multiplier++;
+    this.workers++;
     return this;
 };
 
