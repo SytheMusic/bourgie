@@ -1,6 +1,10 @@
 canvas.industry {
     border: 1px solid gray;
-    margin: 10px;
+    margin: 0px 8px 0px 4px;
     border-radius: 5px;
     box-shadow: 5px 5px 3px gray;
+}
+
+canvas.conveyor {
+    margin: 0px 5px;
 }

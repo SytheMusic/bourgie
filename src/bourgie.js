@@ -6,18 +6,16 @@ Bourgie.demo = function() {
     var forest = Source.FOREST.clone();
     var lumber = Factory.LUMBER_MILL.clone();
     var truck = Sink.LUMBER_TRUCK.clone(bourgie.bank);
+    var f2l = Conveyor.simple(forest, lumber);
+    var l2t = Conveyor.simple(lumber, truck);
 
     bourgie.bind(forest);
+    bourgie.bind(f2l);
     bourgie.bind(lumber);
-    bourgie.add(Conveyor.simple(forest, lumber));
-
+    bourgie.bind(l2t);
     bourgie.bind(truck);
-    bourgie.add(Conveyor.simple(lumber, truck));
 
     bourgie.start();
-    bourgie.add({tick: function() {
-        console.log('world -> tick');
-    }});
 };
 
 $(document).ready(function() {

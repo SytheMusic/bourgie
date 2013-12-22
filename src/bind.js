@@ -15,6 +15,7 @@ Bind.prototype.thingType = 'BIND';
 
 Bind.storeStyle = '#44f';
 Bind.progressStyle = '#ddd';
+Bind.conveyStyle = '#44f';
 
 Bind.prototype.clear = function() {
     var w = this.canvas.width, h = this.canvas.height, c = this.ctx;
@@ -56,6 +57,23 @@ Bind.prototype.industry = function() {
 };
 
 Bind.prototype.conveyor = function() {
+    var w = this.canvas.width, h = this.canvas.height, c = this.ctx;
+    var i = this.thing.input, o = this.thing.output;
+    c.clearRect(0, 0, w, h);
+    c.fillStyle = Bind.conveyStyle;
+    var total = this.thing.time;
+    var radius = 5;
+    var drawW = w - radius * 2;
+    this.thing.timers.forEach(function(time) {
+        var p = time / total;
+        c.beginPath();
+        c.arc(radius + (1 - p) * drawW, h / 2, radius, 0, Math.PI * 2);
+        c.fill();
+    });
+    c.strokeStyle = 'gray';
+    c.beginPath();
+    c.rect(0, h / 2 - radius * 1.5, w, radius * 3);
+    c.stroke();
 };
 
 Bind.prototype.tick = function() {
@@ -67,5 +85,13 @@ Bind.industryCanvas = function(width, height) {
     canvas.width = width || 96;
     canvas.height = height || 96;
     canvas.className = 'industry';
+    return canvas;
+};
+
+Bind.conveyorCanvas = function(width, height) {
+    var canvas = document.createElement('canvas');
+    canvas.width = width || 128;
+    canvas.height = height || 96;
+    canvas.className = 'conveyor';
     return canvas;
 };

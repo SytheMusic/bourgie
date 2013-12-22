@@ -13,7 +13,7 @@ function Conveyor(source, dest, type, rate, time) {
     this.source = source;
     this.dest = dest;
     this.rate = rate;
-    this.time = time;
+    this.time = time * World.TICKS_PER_SECOND;
     this.mod = World.TICKS_PER_MINUTE / rate;
     this.pipeline = new Store(type, 1);
 
@@ -52,7 +52,7 @@ Conveyor.prototype.tick = function() {
         } else {
             this.progress -= this.mod;
             this.source.output.take(this.pipeline.give(1), this.type);
-            this.timers.push(this.time * World.TICKS_PER_SECOND);
+            this.timers.push(this.time);
         }
     }
 };
