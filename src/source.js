@@ -19,6 +19,8 @@ function Source(name, type, rate) {
 
     this.progress = 0;
     this.multiplier = 1;
+    this.workers = 0;
+    this.tempworkers = 0;
     return this;
 }
 
@@ -32,11 +34,13 @@ Source.all = {};
  * Called once per tick.
  */
 Source.prototype.tick = function() {
-    if (this.output.available() > 0) {
+    if (this.workers > 0 && this.output.available() > 0) {
         this.progress += this.multiplier;
         if (this.progress >= this.mod) {
-            this.progress -= this.mod;
-            this.output.give(1);
+            this.progress = 0;
+            this.output.give(this.workers);
+            this.workers -= this.tempworkers;
+            this.tempworkers = 0;
         }
     }
 };
@@ -62,7 +66,7 @@ Source.prototype.getProgress = function() {
  * @returns {Source} this
  */
 Source.prototype.hire = function() {
-    this.multiplier++;
+    this.workers++;
     return this;
 };
 
@@ -71,7 +75,21 @@ Source.prototype.hire = function() {
  * @returns {Source} this
  */
 Source.prototype.upgrade = function() {
-    this.output.capacity *= 2;
+    this.output.capacity = Math.floor(this.output.capacity * 1.5);
+    this.multiplier *= 1.1;
+    return this;
+};
+
+/**
+ * Manually operate this industry for one output.
+ * @param {number} [n=1] number of workers to apply
+ */
+Source.prototype.work = function(n) {
+    n = n || 1;
+    if (this.tempworkers === 0) {
+        this.tempworkers = n;
+        this.workers += n;
+    }
     return this;
 };
 

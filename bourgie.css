@@ -66,6 +66,18 @@ body {
     border-radius: 5px;
     box-shadow: 5px 5px 3px gray;
     margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.industry canvas:hover {
+    box-shadow: 5px 5px 3px #444;
+}
+
+.industry canvas:active {
+    box-shadow: 2px 2px 3px #770;
+    position: relative;
+    left: 3px;
+    top: 3px;
 }
 
 .conveyor canvas {

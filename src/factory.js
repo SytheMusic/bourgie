@@ -27,6 +27,8 @@ function Factory(name, inType, outType, inRate, outRate) {
     this.inProgress = 0;
     this.outProgress = 0;
     this.multiplier = 1;
+    this.workers = 0;
+    this.tempworkers = 0;
     return this;
 }
 
@@ -40,16 +42,19 @@ Factory.all = {};
  * Called once every tick.
  */
 Factory.prototype.tick = function() {
-    if (this.input.count() > 0 && this.output.available() > 0) {
+    var hasInput = this.input.count(), hasOutput = this.output.available();
+    if (this.workers > 0 && hasInput > 0 && hasOutput > 0) {
         this.inProgress += this.multiplier;
         this.outProgress += this.multiplier;
         if (this.inProgress >= this.inMod) {
             this.input.take(1);
-            this.inProgress -= this.inMod;
+            this.inProgress = 0;
         }
         if (this.outProgress >= this.outMod) {
             this.output.give(1);
-            this.outProgress -= this.outMod;
+            this.outProgress = 0;
+            this.workers -= this.tempworkers;
+            this.tempworkers = 0;
         }
     }
 };
@@ -95,6 +100,19 @@ Factory.prototype.hire = function() {
 Factory.prototype.upgrade = function() {
     this.input.capacity *= 2;
     this.output.capacity *= 2;
+    return this;
+};
+
+/**
+ * Manually operate this industry for one output.
+ * @param {number} [n=1] number of workers to apply
+ */
+Factory.prototype.work = function(n) {
+    n = n || 1;
+    if (this.tempworkers === 0) {
+        this.tempworkers = n;
+        this.workers += n;
+    }
     return this;
 };
 

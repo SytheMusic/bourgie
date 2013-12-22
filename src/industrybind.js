@@ -25,6 +25,9 @@ function IndustryBind(thing, $div) {
     $upgrade.on('click', function() {
         _this.upgrade();
     });
+    $canvas.on('click', function() {
+        _this.work();
+    });
 }
 
 IndustryBind.prototype.thingType = 'BIND';
@@ -83,6 +86,10 @@ IndustryBind.prototype.hire = function() {
 
 IndustryBind.prototype.upgrade = function() {
     this.thing.upgrade();
+};
+
+IndustryBind.prototype.work = function() {
+    this.thing.work();
 };
 
 IndustryBind.makeCanvas = function(width, height) {

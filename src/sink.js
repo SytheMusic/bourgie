@@ -20,6 +20,8 @@ function Sink(name, type, rate, bank) {
 
     this.progress = 0;
     this.multiplier = 1;
+    this.workers = 0;
+    this.tempworkers = 0;
 
     return this;
 }
@@ -31,12 +33,14 @@ Sink.prototype.style = '#0af';
 Sink.all = {};
 
 Sink.prototype.tick = function() {
-    if (this.input.count() > 0) {
+    if (this.workers > 0 && this.input.count() > 0) {
         this.progress += this.multiplier;
         if (this.progress >= this.mod) {
-            this.progress -= this.mod;
-            this.input.take(1);
+            this.progress = 0;
+            this.input.take(this.workers);
             this.bank.deposit(this.input.type.value);
+            this.workers -= this.tempworkers;
+            this.tempworkers = 0;
         }
     }
 };
@@ -62,7 +66,7 @@ Sink.prototype.getProgress = function() {
  * @returns {Sink} this
  */
 Sink.prototype.hire = function() {
-    this.multiplier++;
+    this.workers++;
     return this;
 };
 
@@ -71,7 +75,21 @@ Sink.prototype.hire = function() {
  * @returns {Sink} this
  */
 Sink.prototype.upgrade = function() {
-    this.input.capacity *= 2;
+    this.output.capacity = Math.floor(this.output.capacity * 1.5);
+    this.multiplier *= 1.1;
+    return this;
+};
+
+/**
+ * Manually operate this industry for one output.
+ * @param {number} [n=1] number of workers to apply
+ */
+Sink.prototype.work = function(n) {
+    n = n || 1;
+    if (this.tempworkers === 0) {
+        this.tempworkers = n;
+        this.workers += n;
+    }
     return this;
 };
 
