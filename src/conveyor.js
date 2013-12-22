@@ -23,6 +23,8 @@ function Conveyor(source, dest, type, rate, time) {
     return this;
 }
 
+Conveyor.prototype.thingType = 'CONVEYOR';
+
 /**
  * Called once every tick.
  */

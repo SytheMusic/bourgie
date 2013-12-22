@@ -29,6 +29,9 @@ function Factory(name, inType, outType, inRate, outRate) {
     return this;
 }
 
+Factory.prototype.thingType = 'INDUSTRY';
+Factory.prototype.style = '#ff7';
+
 /** Collection of all known factories. */
 Factory.all = {};
 

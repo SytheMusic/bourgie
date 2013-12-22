@@ -21,6 +21,9 @@ function Source(name, type, rate) {
     return this;
 }
 
+Source.prototype.thingType = 'INDUSTRY';
+Source.prototype.style = 'lightgreen';
+
 /** Collection of all known sources. */
 Source.all = {};
 

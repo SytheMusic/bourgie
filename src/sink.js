@@ -17,6 +17,9 @@ function Sink(name, type, rate, bank) {
     return this;
 }
 
+Sink.prototype.thingType = 'SINK';
+Sink.prototype.style = 'lightred';
+
 /** Collection of all known sinks. */
 Sink.all = {};
 
