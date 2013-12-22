@@ -14,6 +14,7 @@ function Bind(thing, canvas) {
 Bind.prototype.thingType = 'BIND';
 
 Bind.storeStyle = '#44f';
+Bind.progressStyle = '#ddd';
 
 Bind.prototype.clear = function() {
     var w = this.canvas.width, h = this.canvas.height, c = this.ctx;
@@ -27,6 +28,8 @@ Bind.prototype.industry = function() {
     var storeW = 6;
     var p = 0;
     this.clear();
+
+    /* Draw stores. */
     c.fillStyle = Bind.storeStyle;
     if (i != null) {
         p = i.count() / i.capacity;
@@ -36,6 +39,14 @@ Bind.prototype.industry = function() {
         p = o.count() / o.capacity;
         c.fillRect(w - w / storeW, (1 - p) * h, w / storeW, h);
     }
+
+    /* Draw progress. */
+    p = this.thing.getProgress();
+    c.fillStyle = Bind.progressStyle;
+    c.beginPath();
+    c.moveTo(w / 2, h / 2);
+    c.arc(w / 2, h / 2, h / 4, 0, Math.PI * 2 * p);
+    c.fill();
 
     c.fillStyle = 'black';
     c.font = 'bold 10pt sans-serif';
