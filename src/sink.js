@@ -44,6 +44,13 @@ Sink.prototype.give = function(count, type) {
 };
 
 /**
+ * @returns {number} between 0 and 1
+ */
+Sink.prototype.getProgress = function() {
+    return Math.min(this.progress / this.mod, 1);
+};
+
+/**
  * @returns {string}
  */
 Sink.prototype.toString = function() {

@@ -72,6 +72,13 @@ Factory.prototype.take = function(count, type) {
 };
 
 /**
+ * @returns {number} between 0 and 1
+ */
+Factory.prototype.getProgress = function() {
+    return Math.min(this.outProgress / this.outMod, 1);
+};
+
+/**
  * @returns {string}
  */
 Factory.prototype.toString = function() {

@@ -50,6 +50,13 @@ Source.prototype.take = function(count, type) {
 };
 
 /**
+ * @returns {number} between 0 and 1
+ */
+Source.prototype.getProgress = function() {
+    return Math.min(this.progress / this.mod, 1);
+};
+
+/**
  * @returns {string}
  */
 Source.prototype.toString = function() {
