@@ -51,6 +51,24 @@ Sink.prototype.getProgress = function() {
 };
 
 /**
+ * Hire a new worker at this industry, increasing its speed.
+ * @returns {Sink} this
+ */
+Sink.prototype.hire = function() {
+    this.multiplier++;
+    return this;
+};
+
+/**
+ * Upgrade the equipment at this industry.
+ * @returns {Sink} this
+ */
+Sink.prototype.upgrade = function() {
+    this.multiplier++;
+    return this;
+};
+
+/**
  * @returns {Sink}
  */
 Sink.prototype.clone = function(bank) {

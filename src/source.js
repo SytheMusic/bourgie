@@ -57,6 +57,24 @@ Source.prototype.getProgress = function() {
 };
 
 /**
+ * Hire a new worker at this industry, increasing its speed.
+ * @returns {Source} this
+ */
+Source.prototype.hire = function() {
+    this.multiplier++;
+    return this;
+};
+
+/**
+ * Upgrade the equipment at this industry.
+ * @returns {Source} this
+ */
+Source.prototype.upgrade = function() {
+    this.multiplier++;
+    return this;
+};
+
+/**
  * @returns {Source}
  */
 Source.prototype.clone = function() {

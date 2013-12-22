@@ -58,6 +58,24 @@ Conveyor.prototype.tick = function() {
 };
 
 /**
+ * Hire a new worker at this conveyor, increasing its speed.
+ * @returns {Source} this
+ */
+Conveyor.prototype.hire = function() {
+    this.pipeline.capacity++;
+    return this;
+};
+
+/**
+ * Upgrade the equipment at this conveyor.
+ * @returns {Source} this
+ */
+Conveyor.prototype.upgrade = function() {
+    this.multiplier++;
+    return this;
+};
+
+/**
  * @returns {string}
  */
 Conveyor.prototype.toString = function() {

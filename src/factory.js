@@ -79,6 +79,24 @@ Factory.prototype.getProgress = function() {
 };
 
 /**
+ * Hire a new worker at this industry, increasing its speed.
+ * @returns {Factory} this
+ */
+Factory.prototype.hire = function() {
+    this.multiplier++;
+    return this;
+};
+
+/**
+ * Upgrade the equipment at this industry.
+ * @returns {Factory} this
+ */
+Factory.prototype.upgrade = function() {
+    this.multiplier++;
+    return this;
+};
+
+/**
  * @returns {string}
  */
 Factory.prototype.toString = function() {
