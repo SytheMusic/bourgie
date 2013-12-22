@@ -11,7 +11,7 @@ World.TICKS_PER_SECOND = 20;
 World.TICKS_PER_MINUTE = World.TICKS_PER_SECOND * 60;
 
 World.prototype.add = function(thing) {
-    if (thing instanceof Bind) {
+    if (thing.thingType === 'BIND') {
         this.bindings.push(thing);
     } else {
         this.entities.push(thing);
@@ -31,15 +31,16 @@ World.prototype.tick = function() {
 };
 
 World.prototype.bind = function(thing) {
-    var canvas = null;
+    var canvas = null, binding = null;
     if (thing.thingType === 'INDUSTRY') {
-        canvas = Bind.industryCanvas();
+        canvas = IndustryBind.makeCanvas();
+        binding = new IndustryBind(thing, canvas);
     } else if (thing.thingType === 'CONVEYOR') {
-        canvas = Bind.conveyorCanvas();
+        canvas = ConveyorBind.makeCanvas();
+        binding = new ConveyorBind(thing, canvas);
     } else {
         throw new Error('Unknown thing type.');
     }
-    var binding = new Bind(thing, canvas);
     this.add(binding).add(thing);
     if (this.$div != null) {
         this.$div.append(canvas);
