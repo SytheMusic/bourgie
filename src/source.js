@@ -71,7 +71,7 @@ Source.prototype.hire = function() {
  * @returns {Source} this
  */
 Source.prototype.upgrade = function() {
-    this.multiplier++;
+    this.output.capacity *= 2;
     return this;
 };
 

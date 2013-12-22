@@ -93,7 +93,8 @@ Factory.prototype.hire = function() {
  * @returns {Factory} this
  */
 Factory.prototype.upgrade = function() {
-    this.multiplier++;
+    this.input.capacity *= 2;
+    this.output.capacity *= 2;
     return this;
 };
 
