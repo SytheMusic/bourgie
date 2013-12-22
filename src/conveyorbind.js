@@ -1,17 +1,29 @@
-function ConveyorBind(thing, canvas) {
-    this.thing = thing;
-    this.$canvas = $(canvas);
-    this.ctx = canvas.getContext('2d');
-    if (thing.thingType === 'CONVEYOR') {
-        this.mode = 'conveyor';
-    } else if (thing.thingType === 'INDUSTRY') {
-        this.mode = 'industry';
-    } else {
-        throw new Error('Unknown thing type.');
-    }
+function ConveyorBind(thing, $div) {
     var _this = this;
-    this.$canvas.on('click', function() {
-        _this.click();
+    this.thing = thing;
+
+    $div.addClass('conveyor');
+
+    var canvas = ConveyorBind.makeCanvas(),
+        $canvas = $(canvas);
+    $div.append($canvas);
+    this.ctx = canvas.getContext('2d');
+
+    var $hire = $('<div/>').attr({
+        'class': 'button hire'
+    }).text('Hire');
+    $div.append($hire);
+
+    var $upgrade = $('<div/>').attr({
+        'class': 'button upgrade'
+    }).text('Upgrade');
+    $div.append($upgrade);
+
+    $hire.on('click', function() {
+        _this.hire();
+    });
+    $upgrade.on('click', function() {
+        _this.upgrade();
     });
 }
 
@@ -31,11 +43,11 @@ ConveyorBind.prototype.render = function() {
     c.fillStyle = ConveyorBind.conveyStyle;
     var total = this.thing.time;
     var radius = 5;
-    var drawW = w - radius * 2;
+    var drawW = w + radius * 4;
     this.thing.timers.forEach(function(time) {
         var p = time / total;
         c.beginPath();
-        c.arc(radius + (1 - p) * drawW, h / 2, radius, 0, Math.PI * 2);
+        c.arc((1 - p) * drawW - 2 * radius, h / 2, radius, 0, Math.PI * 2);
         c.fill();
     });
     c.strokeStyle = 'gray';
@@ -48,14 +60,18 @@ ConveyorBind.prototype.tick = function() {
     this.render();
 };
 
-ConveyorBind.prototype.click = function() {
-    this.thing.pipeline.capacity++;
+ConveyorBind.prototype.hire = function() {
+    this.thing.hire();
+};
+
+ConveyorBind.prototype.upgrade = function() {
+    this.thing.upgrade();
 };
 
 ConveyorBind.makeCanvas = function(width, height) {
     var canvas = document.createElement('canvas');
     canvas.width = width || 128;
     canvas.height = height || 96;
-    canvas.className = 'conveyor';
+    canvas.className = 'building';
     return canvas;
 };

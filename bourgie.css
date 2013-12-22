@@ -16,17 +16,59 @@ body {
 }
 
 #world {
-    width: 606px;
+    width: 540px;
     margin: auto;
 }
 
-canvas.industry {
+.button {
+    display: inline-block;
     border: 1px solid gray;
-    margin: 0px 8px 0px 4px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 3px gray;
+    padding: 3px;
+    margin: 0px 2px;
+    background: #ffa;
+    box-shadow: 2px 2px 1px gray;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 12px;
 }
 
-canvas.conveyor {
-    margin: 0px 5px;
+.button:hover {
+    background: #ff4;
+}
+
+.button:active {
+    background: #f70;
+    box-shadow: 0 0;
+    position: relative;
+    left: 2px;
+    top: 2px;
+}
+
+.industry {
+    text-align: center;
+    display: inline-block;
+    width: 100px;
+    margin: 5px 0px;
+}
+
+.conveyor {
+    text-align: center;
+    display: inline-block;
+    width: 120px;
+    margin: 5px 0px;
+}
+
+.industry canvas {
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 5px 5px 3px gray;
+    margin-bottom: 4px;
+}
+
+.conveyor canvas {
+}
+
+.conveyor .button {
+    position: relative;
+    top: -35px;
 }

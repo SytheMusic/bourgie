@@ -30,24 +30,6 @@ World.prototype.tick = function() {
     this.bank.display();
 };
 
-World.prototype.bind = function(thing) {
-    var canvas = null, binding = null;
-    if (thing.thingType === 'INDUSTRY') {
-        canvas = IndustryBind.makeCanvas();
-        binding = new IndustryBind(thing, canvas);
-    } else if (thing.thingType === 'CONVEYOR') {
-        canvas = ConveyorBind.makeCanvas();
-        binding = new ConveyorBind(thing, canvas);
-    } else {
-        throw new Error('Unknown thing type.');
-    }
-    this.add(binding).add(thing);
-    if (this.$div != null) {
-        this.$div.append(canvas);
-    }
-    return binding;
-};
-
 World.prototype.start = function() {
     if (this.timer == null) {
         var world = this;

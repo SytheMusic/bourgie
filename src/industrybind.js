@@ -1,10 +1,29 @@
-function IndustryBind(thing, canvas) {
-    this.thing = thing;
-    this.$canvas = $(canvas);
-    this.ctx = canvas.getContext('2d');
+function IndustryBind(thing, $div) {
     var _this = this;
-    this.$canvas.on('click', function() {
-        _this.click();
+    this.thing = thing;
+
+    $div.addClass('industry');
+
+    var canvas = IndustryBind.makeCanvas(),
+        $canvas = $(canvas);
+    $div.append($canvas);
+    this.ctx = canvas.getContext('2d');
+
+    var $hire = $('<div/>').attr({
+        'class': 'button hire'
+    }).text('Hire');
+    $div.append($hire);
+
+    var $upgrade = $('<div/>').attr({
+        'class': 'button upgrade'
+    }).text('Upgrade');
+    $div.append($upgrade);
+
+    $hire.on('click', function() {
+        _this.hire();
+    });
+    $upgrade.on('click', function() {
+        _this.upgrade();
     });
 }
 
@@ -56,14 +75,18 @@ IndustryBind.prototype.tick = function() {
     this.render();
 };
 
-IndustryBind.prototype.click = function() {
-    this.thing.multiplier++;
+IndustryBind.prototype.hire = function() {
+    this.thing.hire();
+};
+
+IndustryBind.prototype.upgrade = function() {
+    this.thing.upgrade();
 };
 
 IndustryBind.makeCanvas = function(width, height) {
     var canvas = document.createElement('canvas');
     canvas.width = width || 96;
     canvas.height = height || 96;
-    canvas.className = 'industry';
+    canvas.className = 'building';
     return canvas;
 };
