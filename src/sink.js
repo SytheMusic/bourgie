@@ -75,7 +75,7 @@ Sink.prototype.hire = function() {
  * @returns {Sink} this
  */
 Sink.prototype.upgrade = function() {
-    this.output.capacity = Math.floor(this.output.capacity * 1.5);
+    this.input.capacity = Math.floor(this.input.capacity * 1.5);
     this.multiplier *= 1.1;
     return this;
 };
