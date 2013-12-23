@@ -37,8 +37,8 @@ Sink.prototype.tick = function() {
         this.progress += this.multiplier;
         if (this.progress >= this.mod) {
             this.progress = 0;
-            this.input.take(this.workers);
-            this.bank.deposit(this.input.type.value);
+            var value = this.input.type.value * this.input.take(this.workers);
+            this.bank.deposit(value);
             this.workers -= this.tempworkers;
             this.tempworkers = 0;
         }
