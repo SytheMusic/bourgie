@@ -47,11 +47,11 @@ Factory.prototype.tick = function() {
         this.inProgress += this.multiplier;
         this.outProgress += this.multiplier;
         if (this.inProgress >= this.inMod) {
-            this.input.take(1);
+            this.input.take(this.workers);
             this.inProgress = 0;
         }
         if (this.outProgress >= this.outMod) {
-            this.output.give(1);
+            this.output.give(this.workers);
             this.outProgress = 0;
             this.workers -= this.tempworkers;
             this.tempworkers = 0;
