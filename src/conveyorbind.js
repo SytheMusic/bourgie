@@ -42,17 +42,15 @@ ConveyorBind.prototype.render = function() {
     c.clearRect(0, 0, w, h);
     c.fillStyle = ConveyorBind.conveyStyle;
     var total = this.thing.time;
-    var radius = 5;
-    var drawW = w + radius * 4;
+    var ih = 10, iw = 2;
+    var drawW = w + iw * 2;
     this.thing.timers.forEach(function(time) {
         var p = time / total;
-        c.beginPath();
-        c.arc((1 - p) * drawW - 2 * radius, h / 2, radius, 0, Math.PI * 2);
-        c.fill();
+        c.fillRect((1 - p) * drawW - iw - iw / 2, h / 2 - ih / 2, iw, ih);
     });
     c.strokeStyle = 'gray';
     c.beginPath();
-    c.rect(0, h / 2 - radius * 1.5, w, radius * 3);
+    c.rect(0, h / 2 - ih * 0.75, w, ih * 1.5);
     c.stroke();
 };
 
